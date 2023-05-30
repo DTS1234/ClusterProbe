@@ -10,4 +10,9 @@ public class TestServiceTest {
         Assertions.assertThat(2 + 2).isEqualTo(4);
     }
 
+    @Test
+    void failingTest() {
+        Assertions.assertThat(2 + 2).isEqualTo(5);
+    }
+
 }
