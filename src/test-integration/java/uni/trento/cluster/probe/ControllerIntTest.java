@@ -1,7 +1,6 @@
 package uni.trento.cluster.probe;
 
 import io.restassured.http.ContentType;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -35,12 +34,10 @@ public class ControllerIntTest {
 
     @Test
     void should_return_job_started() {
-        String result =
-
-        given()
+        String result = given()
             .port(port)
             .contentType(ContentType.JSON)
-            .body(new TestSpecification(1L, 1))
+            .body(new TestSpecification(1L, 1, null, null))
         .when()
             .post("/api/job")
         .then()

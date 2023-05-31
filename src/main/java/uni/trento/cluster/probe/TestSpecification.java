@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class TestSpecification {
     private Long durationInSeconds;
     private Integer cpuLoad;
+    private Integer vmWorkers;
+    private Long mBytesRamLoad;
 }
