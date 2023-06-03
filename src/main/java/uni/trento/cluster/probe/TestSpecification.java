@@ -12,4 +12,6 @@ public class TestSpecification {
     private Integer cpuLoad;
     private Integer vmWorkers;
     private Long mBytesRamLoad;
+    private Integer IOworkers;
+    private Long IOBytes;
 }

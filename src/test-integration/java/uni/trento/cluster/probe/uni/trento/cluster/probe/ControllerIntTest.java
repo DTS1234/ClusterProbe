@@ -37,7 +37,7 @@ public class ControllerIntTest {
         String result = given()
             .port(port)
             .contentType(ContentType.JSON)
-            .body(new TestSpecification(1L, 1, null, null))
+            .body(new TestSpecification(1L, 1, null, null, null, null))
         .when()
             .post("/api/job")
         .then()
@@ -45,5 +45,20 @@ public class ControllerIntTest {
 
         assertThat(result)
             .isEqualTo("Job started");
+    }
+
+    @Test
+    void should_return_string_error_message() {
+        String result = given()
+            .port(port)
+            .contentType(ContentType.JSON)
+            .body(new TestSpecification(null, null, null, 1000L, null, null))
+            .when()
+            .post("/api/job")
+            .then()
+            .extract().asString();
+
+        assertThat(result)
+            .isEqualTo("You need to specify number of workers for vm load first.");
     }
 }
