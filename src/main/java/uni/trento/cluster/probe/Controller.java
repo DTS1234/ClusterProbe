@@ -15,6 +15,7 @@ import java.util.Map;
 public class Controller {
 
     private final TestService testService;
+    private final FileOperationsService fileOperationsService;
 
     @PostMapping("/api/load")
     public Map<String, String> payloadTest(@RequestBody Map<String, String> payload) {
@@ -23,7 +24,6 @@ public class Controller {
         );
         return payload;
     }
-
 
     @PostMapping("/api/job")
     public String startJob(@RequestBody TestSpecification specification) {
@@ -38,5 +38,11 @@ public class Controller {
         }
 
         return "Job started";
+    }
+
+    @PostMapping("/api/file-operations")
+    public String createFiles(@RequestBody FileSystemSpecification spec) {
+        fileOperationsService.tesFileSystem(spec);
+        return String.format("File operations performed based on spec %s", spec);
     }
 }
