@@ -4,7 +4,10 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import uni.trento.cluster.probe.fileops.FileSystemSpecification;
+import uni.trento.cluster.probe.stressng.TestSpecification;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -48,7 +51,7 @@ public class ControllerIntTest {
     }
 
     @Test
-    void should_return_string_error_message() {
+    void should_return_string_error_message_for_job_test() {
         String result = given()
             .port(port)
             .contentType(ContentType.JSON)
@@ -56,9 +59,26 @@ public class ControllerIntTest {
             .when()
             .post("/api/job")
             .then()
+            .statusCode(400)
             .extract().asString();
 
         assertThat(result)
             .isEqualTo("You need to specify number of workers for vm load first.");
+    }
+
+    @Test
+    void should_return_string_error_message_for_file_ops_test_wrong_fileContents() {
+        String result = given()
+            .port(port)
+            .contentType(ContentType.JSON)
+            .body(new FileSystemSpecification(10, Arrays.asList("1", "2")))
+            .when()
+            .post("/api/file-operations")
+            .then()
+            .statusCode(400)
+            .extract().asString();
+
+        assertThat(result)
+            .isEqualTo("FileContents should be size of one or size of filesToCreate!, no value will be written. Remove it if you don't want to write to files.");
     }
 }

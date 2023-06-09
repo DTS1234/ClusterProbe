@@ -1,4 +1,4 @@
-package uni.trento.cluster.probe;
+package uni.trento.cluster.probe.stressng;
 
 import org.springframework.stereotype.Service;
 

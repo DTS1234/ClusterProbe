@@ -1,11 +1,15 @@
-package uni.trento.cluster.probe;
+package uni.trento.cluster.probe.fileops;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FileSystemSpecification {
     private int filesToCreate;
     @JsonProperty("fileContents")

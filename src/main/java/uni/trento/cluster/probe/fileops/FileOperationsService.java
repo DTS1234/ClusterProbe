@@ -1,4 +1,4 @@
-package uni.trento.cluster.probe;
+package uni.trento.cluster.probe.fileops;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class FileOperationsService {
 
     public static final String TEST_FILES = System.getProperty("user.dir") + "/test";
 
-    public void tesFileSystem(FileSystemSpecification specification) {
+    public void testFileSystem(FileSystemSpecification specification) {
 
         List<String> paths = new ArrayList<>();
         createTestDir();
@@ -58,8 +58,11 @@ public class FileOperationsService {
             return;
         }
 
-        if (fileContents.size() != paths.size()) {
-            log.info("FileContents should be size of one or size of filesToCreate!, no value will be written.");
+        if (fileContents.size() != paths.size() && fileContents.size() != 1) {
+            log.error("FileContents should be size of one or size of filesToCreate! Remove it if you don't want to write to files.");
+            deleteDirectory(new File(TEST_FILES));
+            throw new IllegalStateException(
+                "FileContents should be size of one or size of filesToCreate!, no value will be written. Remove it if you don't want to write to files.");
         }
 
         if (fileContents.size() == paths.size()) {
@@ -68,13 +71,14 @@ public class FileOperationsService {
                 Path filePath = Path.of(paths.get(i));
                 writeToFile(specification, content, filePath);
             }
-        } else if (fileContents.size() == 1) {
+        } else {
             byte[] content = fileContents.get(0).getBytes();
-            for (String path : paths) {
-                Path filePath = Path.of(path);
+            for (int i = 0; i < paths.size(); i++) {
+                Path filePath = Path.of(paths.get(i));
                 writeToFile(specification, content, filePath);
             }
         }
+
     }
 
     private void createFiles(FileSystemSpecification specification, List<String> paths) {

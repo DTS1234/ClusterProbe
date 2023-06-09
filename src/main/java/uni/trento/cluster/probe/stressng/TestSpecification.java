@@ -1,4 +1,4 @@
-package uni.trento.cluster.probe;
+package uni.trento.cluster.probe.stressng;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
