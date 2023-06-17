@@ -36,4 +36,10 @@ public class SchoolService {
     public List<Course> getCourses() {
         return courseRepository.findAll();
     }
+
+    public List<Student> getStudentsForCourse(Long courseId) {
+        Course course = courseRepository.findById(courseId).orElseThrow();
+        return course.students;
+    }
+
 }
