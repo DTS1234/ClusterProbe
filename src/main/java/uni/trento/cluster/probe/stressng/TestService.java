@@ -20,6 +20,17 @@ public class TestService {
     }
 
     public String getCommandFromSpec(TestSpecification spec) {
+
+        if (spec.getIsCommand()  != null && spec.getIsCommand()) {
+            String command = spec.getCommand();
+
+            if (command == null || command.trim().isEmpty()) {
+                throw new IllegalStateException("You need to pass a stress ng command!");
+            }
+
+            return command;
+        }
+
         int numCores = Runtime.getRuntime().availableProcessors();
 
         String cpuLoadCommand = mapCpuLoadToCommand(spec.getCpuLoad());
@@ -83,7 +94,7 @@ public class TestService {
 
     private String mapCpuLoadToCommand(Integer cpuLoad) {
         if (cpuLoad == null) {
-            return "--cpu-load 5 ";
+            return "";
         }
 
         if (cpuLoad > 100 || cpuLoad < 0) {

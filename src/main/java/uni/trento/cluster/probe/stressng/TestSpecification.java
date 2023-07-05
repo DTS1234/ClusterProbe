@@ -14,4 +14,6 @@ public class TestSpecification {
     private Long mBytesRamLoad;
     private Integer IOworkers;
     private Long IOBytes;
+    private Boolean isCommand;
+    private String command;
 }

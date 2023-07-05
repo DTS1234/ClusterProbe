@@ -55,4 +55,11 @@ public class SchoolController {
         log.info("Students for course : " + courseId);
         return schoolService.getStudentsForCourse(courseId);
     }
+
+    @PostMapping("/clear")
+    public String clearAll() {
+        schoolService.clearAll();
+        return "DB cleared";
+    }
+
 }

@@ -32,7 +32,9 @@ public class TestServiceTest {
             vmWorkers,
             mBytes,
             IOWorkers,
-            IOBytes
+            IOBytes,
+            false,
+            null
         );
 
         // when
@@ -61,7 +63,7 @@ public class TestServiceTest {
     void should_throw_if_vm_bytes_present_without_workers() {
         Assertions.assertThatThrownBy(() -> {
                 testService.getCommandFromSpec(new TestSpecification(
-                    null, null, null, 1L, null, null
+                    null, null, null, 1L, null, null, false, null
                 ));
             }).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("You need to specify number of workers for vm load first.");
@@ -71,7 +73,7 @@ public class TestServiceTest {
     void should_throw_if_io_bytes_present_without_workers() {
         Assertions.assertThatThrownBy(() -> {
                 testService.getCommandFromSpec(new TestSpecification(
-                    null, null, null, null, null, 100L
+                    null, null, null, null, null, 100L, false, null
                 ));
             }).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("You need to specify number of workers for I/O load first.");

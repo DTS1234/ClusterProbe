@@ -42,4 +42,7 @@ public class SchoolService {
         return course.students;
     }
 
+    public void clearAll() {
+        studentRepository.deleteAll();
+    }
 }

@@ -15,7 +15,7 @@ spec:
       containers:
         - name: cluster-probe
           image: 9909733/cluster-probe:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources:
