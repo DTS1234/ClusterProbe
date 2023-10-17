@@ -21,7 +21,7 @@ public class TestService {
 
     public String getCommandFromSpec(TestSpecification spec) {
 
-        if (spec.getIsCommand()  != null && spec.getIsCommand()) {
+        if (spec.getIsCommand() != null && spec.getIsCommand()) {
             String command = spec.getCommand();
 
             if (command == null || command.trim().isEmpty()) {

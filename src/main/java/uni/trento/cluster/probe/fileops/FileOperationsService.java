@@ -73,8 +73,8 @@ public class FileOperationsService {
             }
         } else {
             byte[] content = fileContents.get(0).getBytes();
-            for (int i = 0; i < paths.size(); i++) {
-                Path filePath = Path.of(paths.get(i));
+            for (String path : paths) {
+                Path filePath = Path.of(path);
                 writeToFile(specification, content, filePath);
             }
         }

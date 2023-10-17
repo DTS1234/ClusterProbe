@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import uni.trento.cluster.probe.fileops.FileOperationsService;
 import uni.trento.cluster.probe.fileops.FileSystemSpecification;
 import uni.trento.cluster.probe.stressng.TestService;
@@ -49,4 +51,15 @@ public class Controller {
         fileOperationsService.testFileSystem(spec);
         return String.format("File operations performed based on spec %s", spec);
     }
+
+    @PostMapping("/api/upload-file")
+    public String uploadFile(@RequestBody MultipartFile file) {
+        log.info("Content type : " + file.getContentType());
+
+        String filename = file.getOriginalFilename();
+        log.info(filename);
+
+        return "file uploaded!";
+    }
+
 }
